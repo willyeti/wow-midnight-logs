@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Venomous Abyss Builds</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<style>
+:root{--ground:#F6F5FA;--surface:#FFFFFF;--line:#E2DFEC;--ink:#1B1826;--ink2:#4A465C;
+--muted:#77738A;--spend:#5B45CE;--warm:#B87316;--cd:#1B8A6B;--util:#8E8AA0;
+--shadow:0 1px 2px rgba(27,24,38,.05),0 8px 24px rgba(27,24,38,.05);}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ground:#131120;--surface:#1C1929;--line:#2E2A40;--ink:#EFEDF6;--ink2:#C2BED4;--muted:#918DA6;--spend:#A08FF7;--warm:#E0A44A;--cd:#41C39C;--util:#8E8AA0;--shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.3);}}
+:root[data-theme="dark"]{--ground:#131120;--surface:#1C1929;--line:#2E2A40;--ink:#EFEDF6;--ink2:#C2BED4;--muted:#918DA6;--spend:#A08FF7;--warm:#E0A44A;--cd:#41C39C;--util:#8E8AA0;--shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.3);}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);
+font-family:"IBM Plex Sans",system-ui,-apple-system,sans-serif;font-size:15px;line-height:1.6;
+-webkit-font-smoothing:antialiased}
+.wrap{max-width:1000px;margin:0 auto;padding:56px 24px 96px;display:flex;
+flex-direction:column;gap:36px}
+h1,h2,h3{font-family:Spectral,Georgia,serif;text-wrap:balance;margin:0;font-weight:600}
+h1{font-size:clamp(30px,5vw,44px);letter-spacing:-.015em;line-height:1.12}
+h2{font-size:21px;letter-spacing:-.01em}
+h3{font-size:12px;font-family:"IBM Plex Sans",sans-serif;font-weight:600;text-transform:uppercase;
+letter-spacing:.09em;color:var(--muted);margin-bottom:12px}
+a{color:var(--spend)}
+.hdr{display:flex;flex-direction:column;gap:16px}
+.lede{color:var(--ink2);max-width:66ch;font-size:16px;margin:0}
+.prov{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted);
+border-left:2px solid var(--line);padding-left:14px;max-width:72ch;margin:0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;
+padding:24px;box-shadow:var(--shadow)}
+.flag{border-left:3px solid var(--warm)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);
+font-weight:600;padding:0 9px 8px;border-bottom:1px solid var(--line);vertical-align:bottom}
+td{padding:8px 9px;border-bottom:1px solid var(--line)}
+.t{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;color:var(--ink2)}
+.split{display:flex;align-items:center;gap:8px;min-width:150px}
+.sbar{flex:1;height:8px;background:var(--line);border-radius:2px;overflow:hidden;display:flex}
+.sbar i{display:block;height:100%}
+.sec{background:var(--spend)}
+.skg{background:var(--warm)}
+.win{color:var(--cd);font-weight:600}
+.boss{background:var(--surface);border:1px solid var(--line);border-radius:10px;
+box-shadow:var(--shadow);overflow:hidden}
+.bh{display:flex;align-items:baseline;gap:14px;padding:20px 24px;
+border-bottom:1px solid var(--line);flex-wrap:wrap}
+.ord{font-family:Spectral,Georgia,serif;font-size:26px;color:var(--muted);opacity:.5;
+font-variant-numeric:tabular-nums}
+.bh .meta{margin-left:auto;font-size:12.5px;color:var(--muted);
+font-family:"IBM Plex Mono",monospace}
+.bbody{padding:20px 24px;display:grid;grid-template-columns:1fr 1fr;gap:26px}
+@media(max-width:720px){.bbody{grid-template-columns:1fr;gap:20px}}
+.kv{display:flex;justify-content:space-between;gap:12px;font-size:13.5px;
+padding:5px 0;border-bottom:1px dotted var(--line)}
+.kv span:last-child{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;
+color:var(--ink)}
+.code{font-family:"IBM Plex Mono",monospace;font-size:11.5px;word-break:break-all;
+background:var(--ground);border:1px solid var(--line);border-radius:6px;padding:10px 12px;
+color:var(--ink2);line-height:1.45}
+details{border-top:1px solid var(--line)}
+summary{cursor:pointer;padding:13px 24px;font-size:12px;text-transform:uppercase;
+letter-spacing:.08em;color:var(--muted);font-weight:600}
+summary:hover{color:var(--ink)}
+summary:focus-visible{outline:2px solid var(--spend);outline-offset:-2px}
+.dbody{padding:0 24px 20px}
+.note{font-size:13.5px;color:var(--ink2);margin:0 0 12px}
+.note:last-child{margin-bottom:0}
+.note strong{color:var(--ink)}
+.scroll{overflow-x:auto}
+.pill{display:inline-block;padding:1px 8px;border-radius:4px;font-size:11.5px;font-weight:600;
+text-transform:uppercase;letter-spacing:.05em}
+.pill-warn{color:var(--warm);border:1px solid var(--warm)}
+</style>
+<div class="wrap">
+<header class="hdr">
+  <h1>Balance Druid builds, boss by boss</h1>
+  <p class="lede">What Balance Druids are actually running on the first six bosses of The Venomous
+  Abyss on Heroic &mdash; hero tree split, build consensus, and the one talent decision that genuinely
+  changes between fights.</p>
+  <p class="prov">Source: Archon (Warcraft Logs' build aggregator), Heroic raid, Balance Druid.
+  Each boss ranks the top 50% of parses from the last 14 days. Pulled 25 Aug 2026.
+  Sample sizes differ (1,291&ndash;4,152 parses), so the later bosses are thinner data.</p>
+</header>
+
+<section class="card">
+  <h3>Hero tree, all six bosses</h3>
+  <div class="scroll"><table>
+    <thead><tr><th>#</th><th>Boss</th><th>Parses</th><th>Split</th><th>Elune's<br>Chosen</th>
+    <th>Keeper of<br>the Grove</th><th>EC dps</th><th>KotG dps</th></tr></thead>
+    <tbody><tr><td class="t">1</td><td>Nek&#x27;zali the Soulcoiler</td><td class="t">4,152</td><td><span class="split"><span class="sbar"><i class="sec" style="width:93.8%"></i><i class="skg" style="width:6.1%"></i></span></span></td><td class="t">93.8%</td><td class="t">6.1%</td><td class="t">152.0k</td><td class="t">146.0k</td></tr><tr><td class="t">2</td><td>Entombed Sentinels</td><td class="t">3,254</td><td><span class="split"><span class="sbar"><i class="sec" style="width:97.0%"></i><i class="skg" style="width:2.9%"></i></span></span></td><td class="t">97.0%</td><td class="t">2.9%</td><td class="t">157.1k</td><td class="t">144.9k</td></tr><tr><td class="t">3</td><td>Vashnik the Malignant</td><td class="t">2,506</td><td><span class="split"><span class="sbar"><i class="sec" style="width:97.9%"></i><i class="skg" style="width:2.1%"></i></span></span></td><td class="t">97.9%</td><td class="t">2.1%</td><td class="t">168.7k</td><td class="t">155.5k</td></tr><tr><td class="t">4</td><td>The Lost Explorers</td><td class="t">2,935</td><td><span class="split"><span class="sbar"><i class="sec" style="width:99.6%"></i><i class="skg" style="width:0.4%"></i></span></span></td><td class="t">99.6%</td><td class="t">0.4%</td><td class="t">216.3k</td><td class="t">196.9k</td></tr><tr><td class="t">5</td><td>Sszorak</td><td class="t">1,577</td><td><span class="split"><span class="sbar"><i class="sec" style="width:87.7%"></i><i class="skg" style="width:12.2%"></i></span></span></td><td class="t">87.7%</td><td class="t">12.2%</td><td class="t">153.7k</td><td class="t" class="win">155.2k</td></tr><tr><td class="t">6</td><td>The Twin Fangs</td><td class="t">1,291</td><td><span class="split"><span class="sbar"><i class="sec" style="width:99.8%"></i><i class="skg" style="width:0.2%"></i></span></span></td><td class="t">99.8%</td><td class="t">0.2%</td><td class="t">205.7k</td><td class="t">181.7k</td></tr></tbody>
+  </table></div>
+  <p class="note" style="margin-top:16px"><strong>Elune's Chosen is close to mandatory</strong>
+  &mdash; 87.7% to 99.8% adoption across all six. But look at the DPS columns rather than the
+  adoption columns: on five of six bosses Elune's Chosen leads by 6k&ndash;20k DPS.</p>
+</section>
+
+<section class="card flag">
+  <h3><span class="pill pill-warn">the exception</span></h3>
+  <p class="note"><strong>Sszorak is the one fight where Keeper of the Grove actually wins</strong>
+  &mdash; 155.2k against Elune's Chosen's 153.7k. It is also the fight with the lowest Elune's Chosen
+  adoption of the six (87.7%, against 99.8% on The Twin Fangs), so roughly one Balance Druid in eight
+  has already switched.</p>
+  <p class="note">That lines up with the cast data: Sszorak is the only one of these fights with
+  <strong>zero Starfall casts</strong> in the opening two minutes &mdash; it is pure single target,
+  and the hero tree ranking flips accordingly.</p>
+</section>
+
+<section class="card">
+  <h3>The talent that swings</h3>
+  <div class="scroll"><table>
+    <thead><tr><th>#</th><th>Boss</th><th>Node 117177</th><th>Node 117178</th></tr></thead>
+    <tbody><tr><td class="t">1</td><td>Nek&#x27;zali the Soulcoiler</td><td class="t">35.4%</td><td class="t">58.5%</td></tr><tr><td class="t">2</td><td>Entombed Sentinels</td><td class="t">62.3%</td><td class="t">34.7%</td></tr><tr><td class="t">3</td><td>Vashnik the Malignant</td><td class="t">82.6%</td><td class="t">15.2%</td></tr><tr><td class="t">4</td><td>The Lost Explorers</td><td class="t">93.0%</td><td class="t">6.6%</td></tr><tr><td class="t">5</td><td>Sszorak</td><td class="t">5.4%</td><td class="t">82.3%</td></tr><tr><td class="t">6</td><td>The Twin Fangs</td><td class="t">95.0%</td><td class="t">4.8%</td></tr></tbody>
+  </table></div>
+  <p class="note" style="margin-top:16px">These two are a <strong>choice pair inside Elune's
+  Chosen</strong> &mdash; on every boss their two percentages sum to exactly the Elune's Chosen
+  adoption figure, so every player running that hero tree picks one or the other.</p>
+  <p class="note"><strong>It is the single most fight-dependent decision in the spec:</strong> an
+  89.7-point spread. Node 117177 runs 82.6&ndash;95.0% on the AoE-heavy fights, then collapses to 5.4%
+  on Sszorak, where 117178 takes 82.3%. Nek'zali is the genuinely contested one at 35/59.</p>
+  <p class="note">Archon exposes these only as numeric node IDs and does not render their names in a
+  form I could read, so I am reporting the IDs rather than guessing at labels. Open the Hero Talents
+  section on any linked Archon page to see which two icons they are.</p>
+</section>
+
+
+<section class="boss">
+  <header class="bh"><span class="ord">1</span><h2>Nek&#x27;zali the Soulcoiler</h2>
+    <span class="meta">4,152 parses &middot; 11 hours ago</span></header>
+  <div class="bbody">
+    <div>
+      <h3>Consensus</h3>
+      <div class="kv"><span>Top build share</span><span>19.3%</span></div>
+      <div class="kv"><span>Top build DPS</span><span>154.2k</span></div>
+      <div class="kv"><span>Elune's Chosen</span><span>93.8%</span></div>
+      <div class="kv"><span>Keeper of the Grove</span><span>6.1%</span></div>
+      <div class="kv"><span>Alt build #1</span><span>13.9% &middot; 153.4k</span></div><div class="kv"><span>Alt build #2</span><span>12.2% &middot; 146.8k</span></div><div class="kv"><span>Alt build #3</span><span>11.8% &middot; 148.2k</span></div>
+    </div>
+    <div>
+      <h3>Class tree spread</h3>
+      <div class="kv"><span>Recommended Class Tree</span><span>18.1%</span></div><div class="kv"><span>Alternative Class Tree #1</span><span>16.7%</span></div><div class="kv"><span>Alternative Class Tree #2</span><span>13.6%</span></div><div class="kv"><span>Alternative Class Tree #3</span><span>9.1%</span></div>
+      <p class="note" style="margin-top:12px"><a href="https://www.archon.gg/wow/builds/balance/druid/raid/talents/heroic/nekzali" target="_blank" rel="noopener">Archon page</a>
+      &middot; <a href="https://www.warcraftlogs.com/reports/9ygJN7QPKzVkRCxA#fight=17" target="_blank" rel="noopener">top log</a></p>
+    </div>
+  </div>
+  <details><summary>Talent import string</summary>
+    <div class="dbody"><div class="code">CYGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWoMbNjxMDwsYmZmBDzYMzyMbGzYhlZWGjZmZBDDwYbZmBjZbAMBAAAYxMzMzgNDjxMAAmZgBA</div></div>
+  </details>
+</section>
+<section class="boss">
+  <header class="bh"><span class="ord">2</span><h2>Entombed Sentinels</h2>
+    <span class="meta">3,254 parses &middot; 11 hours ago</span></header>
+  <div class="bbody">
+    <div>
+      <h3>Consensus</h3>
+      <div class="kv"><span>Top build share</span><span>40.9%</span></div>
+      <div class="kv"><span>Top build DPS</span><span>159.5k</span></div>
+      <div class="kv"><span>Elune's Chosen</span><span>97.0%</span></div>
+      <div class="kv"><span>Keeper of the Grove</span><span>2.9%</span></div>
+      <div class="kv"><span>Alt build #1</span><span>12.8% &middot; 143.2k</span></div><div class="kv"><span>Alt build #2</span><span>9.6% &middot; 159.9k</span></div><div class="kv"><span>Alt build #3</span><span>5.3% &middot; 163.1k</span></div>
+    </div>
+    <div>
+      <h3>Class tree spread</h3>
+      <div class="kv"><span>Recommended Class Tree</span><span>30.1%</span></div><div class="kv"><span>Alternative Class Tree #1</span><span>8.7%</span></div><div class="kv"><span>Alternative Class Tree #2</span><span>4.7%</span></div><div class="kv"><span>Alternative Class Tree #3</span><span>4.1%</span></div>
+      <p class="note" style="margin-top:12px"><a href="https://www.archon.gg/wow/builds/balance/druid/raid/talents/heroic/sentinels" target="_blank" rel="noopener">Archon page</a>
+      &middot; <a href="https://www.warcraftlogs.com/reports/1pFx2XP48m3GhdNk#fight=55" target="_blank" rel="noopener">top log</a></p>
+    </div>
+  </div>
+  <details><summary>Talent import string</summary>
+    <div class="dbody"><div class="code">CYGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWoMbNjxMDwswMzMYYGjZWmZxMzYhlZWGjZGLYYAGbbzMYMbDgJAAAALmZmZGsZMjxMAAmZgBA</div></div>
+  </details>
+</section>
+<section class="boss">
+  <header class="bh"><span class="ord">3</span><h2>Vashnik the Malignant</h2>
+    <span class="meta">2,506 parses &middot; 11 hours ago</span></header>
+  <div class="bbody">
+    <div>
+      <h3>Consensus</h3>
+      <div class="kv"><span>Top build share</span><span>51.5%</span></div>
+      <div class="kv"><span>Top build DPS</span><span>169.6k</span></div>
+      <div class="kv"><span>Elune's Chosen</span><span>97.9%</span></div>
+      <div class="kv"><span>Keeper of the Grove</span><span>2.1%</span></div>
+      <div class="kv"><span>Alt build #1</span><span>10.1% &middot; 169.0k</span></div><div class="kv"><span>Alt build #2</span><span>6.9% &middot; 158.9k</span></div><div class="kv"><span>Alt build #3</span><span>4.5% &middot; 165.7k</span></div>
+    </div>
+    <div>
+      <h3>Class tree spread</h3>
+      <div class="kv"><span>Recommended Class Tree</span><span>21.6%</span></div><div class="kv"><span>Alternative Class Tree #1</span><span>12.6%</span></div><div class="kv"><span>Alternative Class Tree #2</span><span>4.7%</span></div><div class="kv"><span>Alternative Class Tree #3</span><span>4.2%</span></div>
+      <p class="note" style="margin-top:12px"><a href="https://www.archon.gg/wow/builds/balance/druid/raid/talents/heroic/vashnik" target="_blank" rel="noopener">Archon page</a>
+      &middot; <a href="https://www.warcraftlogs.com/reports/VhvGQA14dcYjgHyT#fight=64" target="_blank" rel="noopener">top log</a></p>
+    </div>
+  </div>
+  <details><summary>Talent import string</summary>
+    <div class="dbody"><div class="code">CYGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWoMbZMmZgxsMzMzMADjZWmZxMzYhlZWGjZGLYYAGbbzMYMbDgJAAAALMzMzgNjZMmBAwMDMA</div></div>
+  </details>
+</section>
+<section class="boss">
+  <header class="bh"><span class="ord">4</span><h2>The Lost Explorers</h2>
+    <span class="meta">2,935 parses &middot; 6 hours ago</span></header>
+  <div class="bbody">
+    <div>
+      <h3>Consensus</h3>
+      <div class="kv"><span>Top build share</span><span>61.7%</span></div>
+      <div class="kv"><span>Top build DPS</span><span>217.8k</span></div>
+      <div class="kv"><span>Elune's Chosen</span><span>99.6%</span></div>
+      <div class="kv"><span>Keeper of the Grove</span><span>0.4%</span></div>
+      <div class="kv"><span>Alt build #1</span><span>8.0% &middot; 215.7k</span></div><div class="kv"><span>Alt build #2</span><span>3.5% &middot; 209.4k</span></div><div class="kv"><span>Alt build #3</span><span>2.9% &middot; 200.6k</span></div>
+    </div>
+    <div>
+      <h3>Class tree spread</h3>
+      <div class="kv"><span>Recommended Class Tree</span><span>18.2%</span></div><div class="kv"><span>Alternative Class Tree #1</span><span>17.3%</span></div><div class="kv"><span>Alternative Class Tree #2</span><span>8.2%</span></div><div class="kv"><span>Alternative Class Tree #3</span><span>4.3%</span></div>
+      <p class="note" style="margin-top:12px"><a href="https://www.archon.gg/wow/builds/balance/druid/raid/talents/heroic/explorers" target="_blank" rel="noopener">Archon page</a>
+      &middot; <a href="https://www.warcraftlogs.com/reports/1pFx2XP48m3GhdNk#fight=67" target="_blank" rel="noopener">top log</a></p>
+    </div>
+  </div>
+  <details><summary>Talent import string</summary>
+    <div class="dbody"><div class="code">CYGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWoMbNjxMDwswMzMYYGjZWmZxMzYhlZWGjZGLYYAGbbzMYMbDgJAAAALmZmZGsZMjxMAAmZgBA</div></div>
+  </details>
+</section>
+<section class="boss">
+  <header class="bh"><span class="ord">5</span><h2>Sszorak</h2>
+    <span class="meta">1,577 parses &middot; 6 hours ago</span></header>
+  <div class="bbody">
+    <div>
+      <h3>Consensus</h3>
+      <div class="kv"><span>Top build share</span><span>73.5%</span></div>
+      <div class="kv"><span>Top build DPS</span><span>154.4k</span></div>
+      <div class="kv"><span>Elune's Chosen</span><span>87.7%</span></div>
+      <div class="kv"><span>Keeper of the Grove</span><span>12.2%</span></div>
+      <div class="kv"><span>Alt build #1</span><span>3.5% &middot; 148.6k</span></div><div class="kv"><span>Alt build #2</span><span>3.0% &middot; 156.0k</span></div><div class="kv"><span>Alt build #3</span><span>2.7% &middot; 150.2k</span></div>
+    </div>
+    <div>
+      <h3>Class tree spread</h3>
+      <div class="kv"><span>Recommended Class Tree</span><span>35.8%</span></div><div class="kv"><span>Alternative Class Tree #1</span><span>10.7%</span></div><div class="kv"><span>Alternative Class Tree #2</span><span>9.3%</span></div><div class="kv"><span>Alternative Class Tree #3</span><span>2.0%</span></div>
+      <p class="note" style="margin-top:12px"><a href="https://www.archon.gg/wow/builds/balance/druid/raid/talents/heroic/sszorak" target="_blank" rel="noopener">Archon page</a>
+      &middot; <a href="https://www.warcraftlogs.com/reports/cwabd8m7q6AFrpTM#fight=17" target="_blank" rel="noopener">top log</a></p>
+    </div>
+  </div>
+  <details><summary>Talent import string</summary>
+    <div class="dbody"><div class="code">CYGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWoMbNjxMDwsMzMzMYYGjZWmhxMWYZmlZGjZ2wAgx2yMDGz2AYCAAAwiZmZmBbGGjZAAMzglBA</div></div>
+  </details>
+</section>
+<section class="boss">
+  <header class="bh"><span class="ord">6</span><h2>The Twin Fangs</h2>
+    <span class="meta">1,291 parses &middot; 6 hours ago</span></header>
+  <div class="bbody">
+    <div>
+      <h3>Consensus</h3>
+      <div class="kv"><span>Top build share</span><span>69.2%</span></div>
+      <div class="kv"><span>Top build DPS</span><span>206.2k</span></div>
+      <div class="kv"><span>Elune's Chosen</span><span>99.8%</span></div>
+      <div class="kv"><span>Keeper of the Grove</span><span>0.2%</span></div>
+      <div class="kv"><span>Alt build #1</span><span>7.7% &middot; 211.3k</span></div><div class="kv"><span>Alt build #2</span><span>3.0% &middot; 199.0k</span></div><div class="kv"><span>Alt build #3</span><span>2.7% &middot; 189.5k</span></div>
+    </div>
+    <div>
+      <h3>Class tree spread</h3>
+      <div class="kv"><span>Recommended Class Tree</span><span>19.5%</span></div><div class="kv"><span>Alternative Class Tree #1</span><span>10.5%</span></div><div class="kv"><span>Alternative Class Tree #2</span><span>8.2%</span></div><div class="kv"><span>Alternative Class Tree #3</span><span>5.1%</span></div>
+      <p class="note" style="margin-top:12px"><a href="https://www.archon.gg/wow/builds/balance/druid/raid/talents/heroic/the-twin-fangs" target="_blank" rel="noopener">Archon page</a>
+      &middot; <a href="https://www.warcraftlogs.com/reports/C8L4DXqzgNhtpQmx#fight=59" target="_blank" rel="noopener">top log</a></p>
+    </div>
+  </div>
+  <details><summary>Talent import string</summary>
+    <div class="dbody"><div class="code">CYGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWoMbZMmZgxsMzMzMADjZWmZxMzYhlZWGjZGLYYAGbbzMYMbDgJAAAALMzMzgNjZMmBAwMDMA</div></div>
+  </details>
+</section>
+
+<section class="card">
+  <h3>Reading these numbers</h3>
+  <p class="note"><strong>Do not compare DPS across bosses.</strong> The Lost Explorers shows 217.8k
+  and Nek'zali 154.2k &mdash; that is the encounter, not the build. Only compare within a row.</p>
+  <p class="note"><strong>Consensus varies a lot.</strong> Nek'zali's top build holds only 19.3% of
+  parses with four class trees inside nine points of each other; Sszorak's top build holds 73.5%.
+  A low number means the community has not settled, not that the listed build is wrong.</p>
+</section>
+</div></html>

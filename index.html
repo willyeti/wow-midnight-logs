@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Midnight Log Analysis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--ground:#F7F6F8;--surface:#FFFFFF;--line:#E4E0E6;--ink:#1A181D;--ink2:#4B4650;
+--muted:#78717F;--druid:#5B45CE;--dk:#A81D26;
+--shadow:0 1px 2px rgba(26,24,29,.05),0 8px 24px rgba(26,24,29,.06);}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+--ground:#131218;--surface:#1D1B23;--line:#302C38;--ink:#EFEDF3;--ink2:#C4BFCB;
+--muted:#918AA0;--druid:#A08FF7;--dk:#E2565B;
+--shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.3);}}
+:root[data-theme="dark"]{--ground:#131218;--surface:#1D1B23;--line:#302C38;--ink:#EFEDF3;
+--ink2:#C4BFCB;--muted:#918AA0;--druid:#A08FF7;--dk:#E2565B;
+--shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.3);}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);
+font-family:"IBM Plex Sans",system-ui,-apple-system,sans-serif;font-size:15px;line-height:1.6;
+-webkit-font-smoothing:antialiased}
+.wrap{max-width:860px;margin:0 auto;padding:64px 24px 96px;display:flex;
+flex-direction:column;gap:34px}
+h1{font-family:Spectral,Georgia,serif;font-size:clamp(30px,5vw,42px);margin:0;
+letter-spacing:-.015em;line-height:1.14;text-wrap:balance}
+h2{font-family:Spectral,Georgia,serif;font-size:19px;margin:0;font-weight:600}
+.lede{color:var(--ink2);max-width:62ch;font-size:16px;margin:0}
+.prov{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted);
+border-left:2px solid var(--line);padding-left:14px;margin:0;max-width:68ch}
+.grid{display:flex;flex-direction:column;gap:14px}
+a.card{display:block;text-decoration:none;color:inherit;background:var(--surface);
+border:1px solid var(--line);border-left:3px solid var(--line);border-radius:9px;
+padding:20px 22px;box-shadow:var(--shadow);transition:transform .12s ease,border-color .12s ease}
+a.card:hover{transform:translateY(-2px)}
+a.card:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+a.druid{border-left-color:var(--druid)}
+a.druid:hover{border-color:var(--druid)}
+a.dk{border-left-color:var(--dk)}
+a.dk:hover{border-color:var(--dk)}
+.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.09em;font-weight:600;
+margin-bottom:5px}
+.druid .eyebrow{color:var(--druid)}
+.dk .eyebrow{color:var(--dk)}
+.card p{margin:6px 0 0;font-size:13.5px;color:var(--ink2)}
+.meta{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--muted);margin-top:9px}
+footer{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:20px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header style="display:flex;flex-direction:column;gap:14px">
+    <h1>Midnight combat log analysis</h1>
+    <p class="lede">Cast-level breakdowns pulled from Warcraft Logs for World of Warcraft
+    <em>Midnight</em> Season 2 &mdash; what top parses actually press, and which decisions move
+    the damage.</p>
+    <p class="prov">Data from Warcraft Logs, patch 12.1, August 2026. Every page states its own
+    sample size and caveats.</p>
+  </header>
+
+  <div class="grid">
+    <a class="card dk" href="bdk-drw.html">
+      <div class="eyebrow">Blood Death Knight</div>
+      <h2>Inside the Dancing Rune Weapon window</h2>
+      <p>331 DRW windows on Mythic+ trash from the 12 highest-DPS logs. The three decisions that
+      move the damage, and why chaining charges is the one being left on the table.</p>
+      <div class="meta">12 logs &middot; keys 18&ndash;19 &middot; ~30,000 cast events</div>
+    </a>
+
+    <a class="card dk" href="bdk-single-target.html">
+      <div class="eyebrow">Blood Death Knight</div>
+      <h2>Single-target bosses, and the Heroism split</h2>
+      <p>Why the trash playbook does not transfer to a lone boss, and what happened when it turned
+      out nobody lusts on bosses at all.</p>
+      <div class="meta">15 single-target boss pulls &middot; 3,566 seconds</div>
+    </a>
+
+    <a class="card druid" href="boomkin-openers.html">
+      <div class="eyebrow">Balance Druid</div>
+      <h2>The first two minutes</h2>
+      <p>Every cast from the top Heroic parse on each of the first five Venomous Abyss bosses.
+      What the opener holds constant, and what the encounter dictates.</p>
+      <div class="meta">5 bosses &middot; 555 casts &middot; full timelines</div>
+    </a>
+
+    <a class="card druid" href="boomkin-builds.html">
+      <div class="eyebrow">Balance Druid</div>
+      <h2>Builds, boss by boss</h2>
+      <p>Hero tree splits and build consensus across the first six bosses, with importable talent
+      strings &mdash; including the one boss where Keeper of the Grove actually wins.</p>
+      <div class="meta">6 bosses &middot; 15,715 parses</div>
+    </a>
+  </div>
+
+  <footer>Built with Claude Code. Not affiliated with Blizzard Entertainment or Warcraft Logs.</footer>
+</div>
+</body>
+</html>
