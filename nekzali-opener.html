@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nek'zali Opener</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<style>
+:root{--ground:#F6F5FA;--surface:#FFFFFF;--line:#E2DFEC;--ink:#1B1826;--ink2:#4A465C;
+--muted:#77738A;--build:#7C89A8;--spend:#5B45CE;--dot:#B87316;--cd:#1B8A6B;--ecl:#8E4FA8;
+--util:#8E8AA0;--shadow:0 1px 2px rgba(27,24,38,.05),0 8px 24px rgba(27,24,38,.05);}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ground:#131120;--surface:#1C1929;--line:#2E2A40;--ink:#EFEDF6;--ink2:#C2BED4;--muted:#918DA6;--build:#8D9AB8;--spend:#A08FF7;--dot:#E0A44A;--cd:#41C39C;--ecl:#C084D8;--util:#8E8AA0;--shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.3);}}
+:root[data-theme="dark"]{--ground:#131120;--surface:#1C1929;--line:#2E2A40;--ink:#EFEDF6;--ink2:#C2BED4;--muted:#918DA6;--build:#8D9AB8;--spend:#A08FF7;--dot:#E0A44A;--cd:#41C39C;--ecl:#C084D8;--util:#8E8AA0;--shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.3);}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);
+font-family:"IBM Plex Sans",system-ui,-apple-system,sans-serif;font-size:15px;line-height:1.6;
+-webkit-font-smoothing:antialiased}
+.wrap{max-width:1000px;margin:0 auto;padding:56px 24px 96px;display:flex;flex-direction:column;gap:34px}
+h1,h3{font-family:Spectral,Georgia,serif;margin:0;font-weight:600;text-wrap:balance}
+h1{font-size:clamp(29px,5vw,42px);letter-spacing:-.015em;line-height:1.12}
+h3{font-family:"IBM Plex Sans",sans-serif;font-size:12px;font-weight:600;text-transform:uppercase;
+letter-spacing:.09em;color:var(--muted);margin-bottom:12px}
+a{color:var(--spend)}
+.lede{color:var(--ink2);max-width:66ch;font-size:16px;margin:0}
+.prov{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted);
+border-left:2px solid var(--line);padding-left:14px;max-width:74ch;margin:0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:24px;
+box-shadow:var(--shadow)}
+.hero{border-left:3px solid var(--spend)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);
+font-weight:600;padding:0 9px 8px;border-bottom:1px solid var(--line);vertical-align:bottom}
+td{padding:7px 9px;border-bottom:1px solid var(--line);vertical-align:middle}
+.t{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;color:var(--ink2)}
+.chip{display:inline-block;padding:2px 9px;border-radius:4px;font-size:12.5px;font-weight:500;
+border:1px solid transparent;white-space:nowrap}
+.chip.sm{font-size:11px;padding:1px 6px;margin:1px}
+.chip.alt{font-size:11px;padding:1px 6px;margin:1px 3px 1px 0;opacity:.75}
+.chip.alt i{font-style:normal;opacity:.7;font-family:"IBM Plex Mono",monospace}
+.r-build{color:var(--build);border-color:color-mix(in srgb,var(--build) 32%,transparent)}
+.r-spend{color:#fff;background:var(--spend);border-color:var(--spend)}
+.r-dot{color:var(--dot);border-color:color-mix(in srgb,var(--dot) 40%,transparent);
+background:color-mix(in srgb,var(--dot) 9%,transparent)}
+.r-cd{color:#fff;background:var(--cd);border-color:var(--cd)}
+.r-ecl{color:var(--ecl);border-color:color-mix(in srgb,var(--ecl) 45%,transparent)}
+.r-util{color:var(--util);border-color:color-mix(in srgb,var(--util) 30%,transparent)}
+.chip.alt.r-spend,.chip.alt.r-cd{color:#fff}
+.conf{min-width:120px;white-space:nowrap}
+.cbar{display:inline-block;height:8px;background:var(--spend);border-radius:2px;
+vertical-align:middle;margin-right:8px;opacity:.8;max-width:70px}
+.cnum{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--ink2)}
+.ubar{width:34%;min-width:90px}
+.bar{display:block;height:8px;background:var(--spend);border-radius:2px;opacity:.8}
+.seqcell{line-height:2}
+.legend{display:flex;flex-wrap:wrap;gap:8px}
+.note{font-size:13.5px;color:var(--ink2);margin:0 0 12px}
+.note:last-child{margin:0}
+.note strong{color:var(--ink)}
+.big{display:flex;gap:26px;flex-wrap:wrap}
+.stat{flex:1;min-width:130px}
+.sv{font-family:"IBM Plex Mono",monospace;font-size:25px;color:var(--spend);
+font-variant-numeric:tabular-nums;line-height:1.15;display:block}
+.sl{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+.scroll{overflow-x:auto}
+ol.steps{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:9px;font-size:14px}
+ol.steps strong{color:var(--ink)}
+</style>
+<div class="wrap">
+<header style="display:flex;flex-direction:column;gap:15px">
+  <h1>The first 15 casts &mdash; Balance Druid on Heroic Nek'zali</h1>
+  <p class="lede">What 14 top Balance Druid parses actually press in the opening seconds of
+  Nek'zali the Soulcoiler, cast by cast &mdash; and how much of it is genuinely settled.</p>
+  <p class="prov">Source: Warcraft Logs zone 53, encounter 3470, Heroic (difficulty 4).
+  14 parses, all confirmed kills, item level n/a. Pulled 26 Aug 2026.
+  "Consensus" is the share of parses casting that ability at that position.</p>
+  <div class="legend">
+    <span class="chip r-build">builder</span><span class="chip r-spend">spender</span>
+    <span class="chip r-dot">DoT</span><span class="chip r-cd">cooldown</span>
+    <span class="chip r-ecl">eclipse</span><span class="chip r-util">other</span>
+  </div>
+</header>
+
+<section class="card hero">
+  <h3>The headline</h3>
+  <div class="big">
+    <div class="stat"><span class="sv">64%</span><span class="sl">highest agreement at any single position</span></div>
+    <div class="stat"><span class="sv">6</span><span class="sl">abilities every parse uses in its first 15</span></div>
+    <div class="stat"><span class="sv">2</span><span class="sl">parses sharing the most common first five</span></div>
+  </div>
+  <p class="note" style="margin-top:14px"><strong>There is no single canonical opener.</strong> The
+  most agreement at any one position is 64%, and the most popular exact first-five sequence is
+  shared by only 2 of 14 parses. What <em>is</em> fixed is the shape: dots down
+  immediately, cooldowns around 4&ndash;5 seconds, then a Starsurge dump.</p>
+</section>
+
+<section class="card">
+  <h3>Cast by cast</h3>
+  <div class="scroll"><table>
+    <thead><tr><th>#</th><th>Median</th><th>Most common</th><th>Consensus</th>
+    <th>Also seen</th></tr></thead>
+    <tbody><tr><td class="t">1</td><td class="t">0.7s</td><td><span class="chip r-build">Wrath</span></td><td class="conf"><span class="cbar" style="width:50%"></span><span class="cnum">50%</span></td><td><span class="chip r-build alt">Starfire <i>6</i></span><span class="chip r-dot alt">Moonfire <i>1</i></span></td></tr><tr><td class="t">2</td><td class="t">1.0s</td><td><span class="chip r-dot">Sunfire</span></td><td class="conf"><span class="cbar" style="width:43%"></span><span class="cnum">43%</span></td><td><span class="chip r-dot alt">Moonfire <i>6</i></span><span class="chip r-build alt">Wrath <i>2</i></span></td></tr><tr><td class="t">3</td><td class="t">1.9s</td><td><span class="chip r-dot">Moonfire</span></td><td class="conf"><span class="cbar" style="width:43%"></span><span class="cnum">43%</span></td><td><span class="chip r-dot alt">Sunfire <i>6</i></span><span class="chip r-cd alt">Fury of Elune <i>1</i></span><span class="chip r-ecl alt">Lunar Eclipse <i>1</i></span></td></tr><tr><td class="t">4</td><td class="t">2.8s</td><td><span class="chip r-ecl">Lunar Eclipse</span></td><td class="conf"><span class="cbar" style="width:43%"></span><span class="cnum">43%</span></td><td><span class="chip r-dot alt">Sunfire <i>3</i></span><span class="chip r-cd alt">Fury of Elune <i>2</i></span><span class="chip r-util alt">Light&#x27;s Potential <i>1</i></span></td></tr><tr><td class="t">5</td><td class="t">3.5s</td><td><span class="chip r-build">Starfire</span></td><td class="conf"><span class="cbar" style="width:43%"></span><span class="cnum">43%</span></td><td><span class="chip r-cd alt">Fury of Elune <i>5</i></span><span class="chip r-ecl alt">Lunar Eclipse <i>1</i></span><span class="chip r-util alt">Empowering Venom <i>1</i></span></td></tr><tr><td class="t">6</td><td class="t">4.5s</td><td><span class="chip r-build">Starfire</span></td><td class="conf"><span class="cbar" style="width:43%"></span><span class="cnum">43%</span></td><td><span class="chip r-cd alt">Incarnation: Chosen of Elune <i>4</i></span><span class="chip r-cd alt">Fury of Elune <i>2</i></span><span class="chip r-cd alt">Potion of Recklessness <i>1</i></span></td></tr><tr><td class="t">7</td><td class="t">4.9s</td><td><span class="chip r-build">Starfire</span></td><td class="conf"><span class="cbar" style="width:29%"></span><span class="cnum">29%</span></td><td><span class="chip r-util alt">Empowering Venom <i>4</i></span><span class="chip r-cd alt">Incarnation: Chosen of Elune <i>3</i></span><span class="chip r-util alt">Light&#x27;s Potential <i>2</i></span></td></tr><tr><td class="t">8</td><td class="t">5.0s</td><td><span class="chip r-cd">Incarnation: Chosen of Elune</span></td><td class="conf"><span class="cbar" style="width:21%"></span><span class="cnum">21%</span></td><td><span class="chip r-util alt">Light&#x27;s Potential <i>3</i></span><span class="chip r-cd alt">Fury of Elune <i>2</i></span><span class="chip r-cd alt">Potion of Recklessness <i>2</i></span></td></tr><tr><td class="t">9</td><td class="t">5.9s</td><td><span class="chip r-build">Starfire</span></td><td class="conf"><span class="cbar" style="width:43%"></span><span class="cnum">43%</span></td><td><span class="chip r-util alt">Empowering Venom <i>3</i></span><span class="chip r-cd alt">Berserking <i>2</i></span><span class="chip r-cd alt">Potion of Recklessness <i>1</i></span></td></tr><tr><td class="t">10</td><td class="t">6.3s</td><td><span class="chip r-spend">Starsurge</span></td><td class="conf"><span class="cbar" style="width:29%"></span><span class="cnum">29%</span></td><td><span class="chip r-util alt">Empowering Venom <i>3</i></span><span class="chip r-cd alt">Incarnation: Chosen of Elune <i>2</i></span><span class="chip r-build alt">Starfire <i>2</i></span></td></tr><tr><td class="t">11</td><td class="t">6.9s</td><td><span class="chip r-spend">Starsurge</span></td><td class="conf"><span class="cbar" style="width:43%"></span><span class="cnum">43%</span></td><td><span class="chip r-build alt">Starfire <i>5</i></span><span class="chip r-cd alt">Incarnation: Chosen of Elune <i>1</i></span><span class="chip r-cd alt">Potion of Recklessness <i>1</i></span></td></tr><tr><td class="t">12</td><td class="t">7.7s</td><td><span class="chip r-spend">Starsurge</span></td><td class="conf"><span class="cbar" style="width:64%"></span><span class="cnum">64%</span></td><td><span class="chip r-build alt">Starfire <i>4</i></span><span class="chip r-spend alt">Starfall <i>1</i></span></td></tr><tr><td class="t">13</td><td class="t">8.4s</td><td><span class="chip r-spend">Starsurge</span></td><td class="conf"><span class="cbar" style="width:57%"></span><span class="cnum">57%</span></td><td><span class="chip r-build alt">Starfire <i>6</i></span></td></tr><tr><td class="t">14</td><td class="t">9.3s</td><td><span class="chip r-build">Starfire</span></td><td class="conf"><span class="cbar" style="width:50%"></span><span class="cnum">50%</span></td><td><span class="chip r-spend alt">Starsurge <i>7</i></span></td></tr><tr><td class="t">15</td><td class="t">10.3s</td><td><span class="chip r-build">Starfire</span></td><td class="conf"><span class="cbar" style="width:43%"></span><span class="cnum">43%</span></td><td><span class="chip r-spend alt">Starsurge <i>6</i></span><span class="chip r-spend alt">Starfall <i>1</i></span><span class="chip r-dot alt">Sunfire <i>1</i></span></td></tr></tbody>
+  </table></div>
+  <p class="note" style="margin-top:16px">Read the consensus column as a confidence signal. Positions
+  1&ndash;4 look decided but are really two orderings of the same idea (a filler plus both DoTs).
+  Positions 12&ndash;13 are the most settled in the whole opener &mdash; that is the Starsurge dump,
+  and it is the one part everyone agrees on.</p>
+</section>
+
+<section class="card">
+  <h3>What every parse includes</h3>
+  <div class="scroll"><table>
+    <thead><tr><th>Ability</th><th>Share of parses</th><th>%</th><th>Casts per opener</th></tr></thead>
+    <tbody><tr><td><span class="chip r-build">Starfire</span></td><td class="ubar"><span class="bar" style="width:100%"></span></td><td class="t">100%</td><td class="t">4.21</td></tr><tr><td><span class="chip r-spend">Starsurge</span></td><td class="ubar"><span class="bar" style="width:100%"></span></td><td class="t">100%</td><td class="t">3.00</td></tr><tr><td><span class="chip r-dot">Sunfire</span></td><td class="ubar"><span class="bar" style="width:100%"></span></td><td class="t">100%</td><td class="t">1.14</td></tr><tr><td><span class="chip r-dot">Moonfire</span></td><td class="ubar"><span class="bar" style="width:100%"></span></td><td class="t">100%</td><td class="t">1.00</td></tr><tr><td><span class="chip r-cd">Fury of Elune</span></td><td class="ubar"><span class="bar" style="width:100%"></span></td><td class="t">100%</td><td class="t">1.00</td></tr><tr><td><span class="chip r-cd">Incarnation: Chosen of Elune</span></td><td class="ubar"><span class="bar" style="width:100%"></span></td><td class="t">100%</td><td class="t">1.00</td></tr><tr><td><span class="chip r-util">Empowering Venom</span></td><td class="ubar"><span class="bar" style="width:93%"></span></td><td class="t">93%</td><td class="t">0.93</td></tr><tr><td><span class="chip r-build">Wrath</span></td><td class="ubar"><span class="bar" style="width:50%"></span></td><td class="t">50%</td><td class="t">0.64</td></tr><tr><td><span class="chip r-ecl">Lunar Eclipse</span></td><td class="ubar"><span class="bar" style="width:57%"></span></td><td class="t">57%</td><td class="t">0.57</td></tr><tr><td><span class="chip r-util">Light&#x27;s Potential</span></td><td class="ubar"><span class="bar" style="width:57%"></span></td><td class="t">57%</td><td class="t">0.57</td></tr><tr><td><span class="chip r-cd">Potion of Recklessness</span></td><td class="ubar"><span class="bar" style="width:43%"></span></td><td class="t">43%</td><td class="t">0.43</td></tr><tr><td><span class="chip r-spend">Starfall</span></td><td class="ubar"><span class="bar" style="width:14%"></span></td><td class="t">14%</td><td class="t">0.21</td></tr><tr><td><span class="chip r-cd">Berserking</span></td><td class="ubar"><span class="bar" style="width:14%"></span></td><td class="t">14%</td><td class="t">0.14</td></tr><tr><td><span class="chip r-util">Nullsight</span></td><td class="ubar"><span class="bar" style="width:7%"></span></td><td class="t">7%</td><td class="t">0.07</td></tr><tr><td><span class="chip r-util">Darkmoon Firework</span></td><td class="ubar"><span class="bar" style="width:7%"></span></td><td class="t">7%</td><td class="t">0.07</td></tr></tbody>
+  </table></div>
+  <p class="note" style="margin-top:16px"><strong>Six abilities appear in all 14 openers:</strong>
+  Starfire, Starsurge, Sunfire, Moonfire, Fury of Elune and Incarnation. Those are the non-negotiables.</p>
+  <p class="note"><strong>Lunar Eclipse is not one of them</strong> &mdash; it shows up in only
+  57% of openers. Worth knowing if you have been treating it as mandatory.</p>
+</section>
+
+<section class="card">
+  <h3>When the important buttons land</h3>
+  <div class="scroll"><table>
+    <thead><tr><th>Ability</th><th>Parses using it</th><th>Median position</th>
+    <th>Median time</th></tr></thead>
+    <tbody><tr><td><span class="chip r-cd">Fury of Elune</span></td><td class="t">14 / 14</td><td class="t">#5</td><td class="t">3.8s</td></tr><tr><td><span class="chip r-cd">Incarnation: Chosen of Elune</span></td><td class="t">14 / 14</td><td class="t">#8</td><td class="t">4.9s</td></tr><tr><td><span class="chip r-ecl">Lunar Eclipse</span></td><td class="t">8 / 14</td><td class="t">#4</td><td class="t">2.8s</td></tr><tr><td><span class="chip r-spend">Starsurge</span></td><td class="t">14 / 14</td><td class="t">#11</td><td class="t">6.2s</td></tr><tr><td><span class="chip r-util">Empowering Venom</span></td><td class="t">13 / 14</td><td class="t">#9</td><td class="t">4.8s</td></tr><tr><td><span class="chip r-cd">Potion of Recklessness</span></td><td class="t">6 / 14</td><td class="t">#8</td><td class="t">5.8s</td></tr><tr><td><span class="chip r-spend">Starfall</span></td><td class="t">2 / 14</td><td class="t">#12</td><td class="t">7.2s</td></tr></tbody>
+  </table></div>
+  <p class="note" style="margin-top:16px"><strong>Fury of Elune is the earliest cooldown</strong>
+  &mdash; median cast #5 at 3.8s, in every single parse. Incarnation follows at #8 around 4.9s, and
+  the first Starsurge does not land until #11 at 6.2s. The opener is roughly five seconds of setup
+  before any spending happens.</p>
+  <p class="note"><strong>Starfall barely features</strong> &mdash; 2 of 14. Nek'zali opens as
+  single-target.</p>
+</section>
+
+<section class="card">
+  <h3>Two things people do differently</h3>
+  <p class="note"><strong>First cast:</strong> Wrath 50%, Starfire 43%. Both are just a
+  filler while closing to the boss &mdash; whichever your Eclipse state favours.</p>
+  <p class="note"><strong>DoT order:</strong> Moonfire first in 64% of parses, Sunfire first in
+  36%. No meaningful consensus, and both are down inside the first two seconds either way.</p>
+</section>
+
+<section class="card">
+  <h3>Every parse, side by side</h3>
+  <div class="scroll"><table>
+    <thead><tr><th>Player</th><th>ilvl</th><th>DPS</th><th>First 15 casts</th></tr></thead>
+    <tbody><tr><td>Cleansekin</td><td class="t"></td><td class="t">318</td><td class="seqcell"><span class="chip r-build sm">Starfire</span><span class="chip r-dot sm">Sunfire</span><span class="chip r-dot sm">Moonfire</span><span class="chip r-ecl sm">Lunar Eclipse</span><span class="chip r-build sm">Starfire</span><span class="chip r-build sm">Starfire</span><span class="chip r-cd sm">Fury of Elune</span><span class="chip r-cd sm">Incarnation: Chosen of Elune</span><span class="chip r-util sm">Empowering Venom</span><span class="chip r-util sm">Light&#x27;s Potential</span><span class="chip r-spend sm">Starsurge</span><span class="chip r-spend sm">Starsurge</span><span class="chip r-build sm">Starfire</span><span class="chip r-spend sm">Starsurge</span><span class="chip r-build sm">Starfire</span></td></tr><tr><td>Cotti</td><td class="t"></td><td class="t">315</td><td class="seqcell"><span class="chip r-build sm">Wrath</span><span class="chip r-dot sm">Sunfire</span><span class="chip r-dot sm">Moonfire</span><span class="chip r-ecl sm">Lunar Eclipse</span><span class="chip r-build sm">Starfire</span><span class="chip r-build sm">Starfire</span><span class="chip r-build sm">Starfire</span><span class="chip r-cd sm">Fury of Elune</span><span class="chip r-cd sm">Potion of Recklessness</span><span class="chip r-util sm">Empowering Venom</span><span class="chip r-cd sm">Incarnation: Chosen of Elune</span><span class="chip r-spend sm">Starsurge</span><span class="chip r-spend sm">Starsurge</span><span class="chip r-build sm">Starfire</span><span class="chip r-build sm">Starfire</span></td></tr><tr><td>Буанасера</td><td class="t"></td><td class="t">315</td><td class="seqcell"><span class="chip r-dot sm">Moonfire</span><span class="chip r-dot sm">Sunfire</span><span class="chip r-cd sm">Fury of Elune</span><span class="chip r-util sm">Light&#x27;s Potential</span><span class="chip r-util sm">Empowering Venom</span><span class="chip r-cd sm">Incarnation: Chosen of Elune</span><span class="chip r-build sm">Starfire</span><span class="chip r-spend sm">Starsurge</span><span class="chip r-build sm">Starfire</span><span class="chip r-build sm">Starfire</span><span class="chip r-build sm">Starfire</span><span class="chip r-build sm">Starfire</span><span class="chip r-spend sm">Starsurge</span><span class="chip r-spend sm">Starsurge</span><span class="chip r-spend sm">Starsurge</span></td></tr><tr><td>Déquek</td><td class="t"></td><td class="t">314</td><td class="seqcell"><span class="chip r-build sm">Wrath</span><span class="chip r-dot sm">Moonfire</span><span class="chip r-dot sm">Sunfire</span><span class="chip r-cd sm">Fury of Elune</span><span class="chip r-ecl sm">Lunar Eclipse</span><span class="chip r-build sm">Starfire</span><span class="chip r-cd sm">Incarnation: Chosen of Elune</span><span class="chip r-cd sm">Potion of Recklessness</span><span class="chip r-cd sm">Berserking</span><span class="chip r-util sm">Empowering Venom</span><span class="chip r-build sm">Starfire</span><span class="chip r-spend sm">Starsurge</span><span class="chip r-build sm">Starfire</span><span class="chip r-spend sm">Starsurge</span><span class="chip r-spend sm">Starsurge</span></td></tr><tr><td>才羽桃井</td><td class="t"></td><td class="t">314</td><td class="seqcell"><span class="chip r-build sm">Wrath</span><span class="chip r-dot sm">Moonfire</span><span class="chip r-dot sm">Sunfire</span><span class="chip r-ecl sm">Lunar Eclipse</span><span class="chip r-build sm">Starfire</span><span class="chip r-cd sm">Fury of Elune</span><span class="chip r-cd sm">Incarnation: Chosen of Elune</span><span class="chip r-util sm">Light&#x27;s Potential</span><span class="chip r-util sm">Empowering Venom</span><span class="chip r-spend sm">Starfall</span><span class="chip r-spend sm">Starsurge</span><span class="chip r-spend sm">Starfall</span><span class="chip r-build sm">Starfire</span><span class="chip r-build sm">Starfire</span><span class="chip r-spend sm">Starsurge</span></td></tr><tr><td>Opora</td><td class="t"></td><td class="t">314</td><td class="seqcell"><span class="chip r-build sm">Starfire</span><span class="chip r-dot sm">Sunfire</span><span class="chip r-dot sm">Moonfire</span><span class="chip r-dot sm">Sunfire</span><span class="chip r-cd sm">Fury of Elune</span><span class="chip r-cd sm">Incarnation: Chosen of Elune</span><span class="chip r-util sm">Empowering Venom</span><span class="chip r-util sm">Light&#x27;s Potential</span><span class="chip r-build sm">Starfire</span><span class="chip r-spend sm">Starsurge</span><span class="chip r-spend sm">Starsurge</span><span class="chip r-build sm">Starfire</span><span class="chip r-spend sm">Starsurge</span><span class="chip r-build sm">Starfire</span><span class="chip r-build sm">Starfire</span></td></tr><tr><td>Великейн</td><td class="t"></td><td class="t">314</td><td class="seqcell"><span class="chip r-build sm">Starfire</span><span class="chip r-dot sm">Moonfire</span><span class="chip r-dot sm">Sunfire</span><span class="chip r-cd sm">Fury of Elune</span><span class="chip r-util sm">Light&#x27;s Potential</span><span class="chip r-util sm">Empowering Venom</span><span class="chip r-cd sm">Incarnation: Chosen of Elune</span><span class="chip r-build sm">Starfire</span><span class="chip r-build sm">Starfire</span><span class="chip r-build sm">Starfire</span><span class="chip r-spend sm">Starsurge</span><span class="chip r-spend sm">Starsurge</span><span class="chip r-spend sm">Starsurge</span><span class="chip r-build sm">Starfire</span><span class="chip r-build sm">Starfire</span></td></tr><tr><td>Ninatô</td><td class="t"></td><td class="t">314</td><td class="seqcell"><span class="chip r-build sm">Wrath</span><span class="chip r-dot sm">Sunfire</span><span class="chip r-ecl sm">Lunar Eclipse</span><span class="chip r-dot sm">Moonfire</span><span class="chip r-build sm">Starfire</span><span class="chip r-cd sm">Fury of Elune</span><span class="chip r-util sm">Light&#x27;s Potential</span><span class="chip r-cd sm">Incarnation: Chosen of Elune</span><span class="chip r-cd sm">Berserking</span><span class="chip r-util sm">Empowering Venom</span><span class="chip r-spend sm">Starsurge</span><span class="chip r-spend sm">Starsurge</span><span class="chip r-build sm">Starfire</span><span class="chip r-build sm">Starfire</span><span class="chip r-spend sm">Starsurge</span></td></tr><tr><td>Dride</td><td class="t"></td><td class="t">313</td><td class="seqcell"><span class="chip r-build sm">Starfire</span><span class="chip r-dot sm">Moonfire</span><span class="chip r-dot sm">Sunfire</span><span class="chip r-ecl sm">Lunar Eclipse</span><span class="chip r-build sm">Starfire</span><span class="chip r-build sm">Starfire</span><span class="chip r-build sm">Starfire</span><span class="chip r-cd sm">Potion of Recklessness</span><span class="chip r-cd sm">Fury of Elune</span><span class="chip r-cd sm">Incarnation: Chosen of Elune</span><span class="chip r-util sm">Empowering Venom</span><span class="chip r-spend sm">Starsurge</span><span class="chip r-spend sm">Starsurge</span><span class="chip r-spend sm">Starsurge</span><span class="chip r-build sm">Starfire</span></td></tr><tr><td>Lerepam</td><td class="t"></td><td class="t">313</td><td class="seqcell"><span class="chip r-build sm">Wrath</span><span class="chip r-build sm">Wrath</span><span class="chip r-dot sm">Moonfire</span><span class="chip r-dot sm">Sunfire</span><span class="chip r-cd sm">Fury of Elune</span><span class="chip r-cd sm">Incarnation: Chosen of Elune</span><span class="chip r-util sm">Empowering Venom</span><span class="chip r-util sm">Light&#x27;s Potential</span><span class="chip r-build sm">Starfire</span><span class="chip r-spend sm">Starsurge</span><span class="chip r-build sm">Starfire</span><span class="chip r-spend sm">Starsurge</span><span class="chip r-build sm">Starfire</span><span class="chip r-build sm">Starfire</span><span class="chip r-spend sm">Starsurge</span></td></tr><tr><td>Puzzle</td><td class="t"></td><td class="t">312</td><td class="seqcell"><span class="chip r-build sm">Starfire</span><span class="chip r-dot sm">Moonfire</span><span class="chip r-dot sm">Sunfire</span><span class="chip r-ecl sm">Lunar Eclipse</span><span class="chip r-cd sm">Fury of Elune</span><span class="chip r-build sm">Starfire</span><span class="chip r-util sm">Light&#x27;s Potential</span><span class="chip r-util sm">Nullsight</span><span class="chip r-cd sm">Incarnation: Chosen of Elune</span><span class="chip r-util sm">Darkmoon Firework</span><span class="chip r-build sm">Starfire</span><span class="chip r-spend sm">Starsurge</span><span class="chip r-spend sm">Starsurge</span><span class="chip r-spend sm">Starsurge</span><span class="chip r-spend sm">Starfall</span></td></tr><tr><td>Garyeet</td><td class="t"></td><td class="t">312</td><td class="seqcell"><span class="chip r-build sm">Wrath</span><span class="chip r-dot sm">Moonfire</span><span class="chip r-dot sm">Sunfire</span><span class="chip r-ecl sm">Lunar Eclipse</span><span class="chip r-build sm">Starfire</span><span class="chip r-build sm">Starfire</span><span class="chip r-build sm">Starfire</span><span class="chip r-cd sm">Fury of Elune</span><span class="chip r-util sm">Empowering Venom</span><span class="chip r-cd sm">Incarnation: Chosen of Elune</span><span class="chip r-cd sm">Potion of Recklessness</span><span class="chip r-spend sm">Starsurge</span><span class="chip r-spend sm">Starsurge</span><span class="chip r-spend sm">Starsurge</span><span class="chip r-build sm">Starfire</span></td></tr><tr><td>Nzlacuenta</td><td class="t"></td><td class="t">311</td><td class="seqcell"><span class="chip r-build sm">Wrath</span><span class="chip r-build sm">Wrath</span><span class="chip r-dot sm">Moonfire</span><span class="chip r-dot sm">Sunfire</span><span class="chip r-cd sm">Fury of Elune</span><span class="chip r-cd sm">Potion of Recklessness</span><span class="chip r-util sm">Empowering Venom</span><span class="chip r-cd sm">Incarnation: Chosen of Elune</span><span class="chip r-build sm">Starfire</span><span class="chip r-spend sm">Starsurge</span><span class="chip r-build sm">Starfire</span><span class="chip r-build sm">Starfire</span><span class="chip r-spend sm">Starsurge</span><span class="chip r-build sm">Starfire</span><span class="chip r-spend sm">Starsurge</span></td></tr><tr><td>Piete</td><td class="t"></td><td class="t">311</td><td class="seqcell"><span class="chip r-build sm">Starfire</span><span class="chip r-dot sm">Sunfire</span><span class="chip r-dot sm">Moonfire</span><span class="chip r-cd sm">Potion of Recklessness</span><span class="chip r-cd sm">Fury of Elune</span><span class="chip r-cd sm">Incarnation: Chosen of Elune</span><span class="chip r-util sm">Empowering Venom</span><span class="chip r-spend sm">Starsurge</span><span class="chip r-build sm">Starfire</span><span class="chip r-spend sm">Starsurge</span><span class="chip r-spend sm">Starsurge</span><span class="chip r-build sm">Starfire</span><span class="chip r-build sm">Starfire</span><span class="chip r-spend sm">Starsurge</span><span class="chip r-dot sm">Sunfire</span></td></tr></tbody>
+  </table></div>
+</section>
+
+<section class="card">
+  <h3>The opener, as a plan</h3>
+  <ol class="steps">
+    <li><strong>Filler on the way in</strong> &mdash; Wrath or Starfire, whichever suits your Eclipse.</li>
+    <li><strong>Both DoTs immediately</strong> &mdash; Moonfire and Sunfire inside the first two
+    seconds. Order does not matter.</li>
+    <li><strong>Eclipse if you want it</strong> &mdash; around cast 4, though only 57% bother.</li>
+    <li><strong>Fury of Elune around cast 5</strong>, near 3.8s. Every parse does this.</li>
+    <li><strong>Incarnation around cast 8</strong>, near 4.9s, with your potion and trinket in the
+    same window.</li>
+    <li><strong>Then dump Starsurge</strong> from about cast 10 onward. Positions 12 and 13 are the
+    most agreed-upon casts in the entire opener.</li>
+  </ol>
+</section>
+
+<section class="card">
+  <h3>Caveats</h3>
+  <p class="note">14 parses is a small sample &mdash; enough to show the shape, not enough to
+  call a 43%-versus-36% split meaningful. Treat anything under about 60% consensus as "no agreement".</p>
+  <p class="note">Casts are ordered by log timestamp, so abilities sharing a global (a trinket fired
+  alongside Incarnation, for example) can appear in either order. That is why Light's Potential,
+  Empowering Venom and Potion of Recklessness drift across positions 7&ndash;10.</p>
+</section>
+</div></html>
