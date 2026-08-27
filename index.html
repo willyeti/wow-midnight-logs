@@ -9,14 +9,14 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 :root{--ground:#F7F6F8;--surface:#FFFFFF;--line:#E4E0E6;--ink:#1A181D;--ink2:#4B4650;
---muted:#78717F;--druid:#5B45CE;--dk:#A81D26;
+--muted:#78717F;--druid:#5B45CE;--dk:#A81D26;--warr:#8A5A12;
 --shadow:0 1px 2px rgba(26,24,29,.05),0 8px 24px rgba(26,24,29,.06);}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
 --ground:#131218;--surface:#1D1B23;--line:#302C38;--ink:#EFEDF3;--ink2:#C4BFCB;
---muted:#918AA0;--druid:#A08FF7;--dk:#E2565B;
+--muted:#918AA0;--druid:#A08FF7;--dk:#E2565B;--warr:#C98A2E;
 --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.3);}}
 :root[data-theme="dark"]{--ground:#131218;--surface:#1D1B23;--line:#302C38;--ink:#EFEDF3;
---ink2:#C4BFCB;--muted:#918AA0;--druid:#A08FF7;--dk:#E2565B;
+--ink2:#C4BFCB;--muted:#918AA0;--druid:#A08FF7;--dk:#E2565B;--warr:#C98A2E;
 --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.3);}
 *{box-sizing:border-box}
 body{margin:0;background:var(--ground);color:var(--ink);
@@ -40,10 +40,13 @@ a.druid{border-left-color:var(--druid)}
 a.druid:hover{border-color:var(--druid)}
 a.dk{border-left-color:var(--dk)}
 a.dk:hover{border-color:var(--dk)}
+a.warr{border-left-color:var(--warr)}
+a.warr:hover{border-color:var(--warr)}
 .eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.09em;font-weight:600;
 margin-bottom:5px}
 .druid .eyebrow{color:var(--druid)}
 .dk .eyebrow{color:var(--dk)}
+.warr .eyebrow{color:var(--warr)}
 .card p{margin:6px 0 0;font-size:13.5px;color:var(--ink2)}
 .meta{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--muted);margin-top:9px}
 footer{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:20px}
@@ -75,6 +78,14 @@ footer{font-size:13px;color:var(--muted);border-top:1px solid var(--line);paddin
       <p>Why the trash playbook does not transfer to a lone boss, and what happened when it turned
       out nobody lusts on bosses at all.</p>
       <div class="meta">15 single-target boss pulls &middot; 3,566 seconds</div>
+    </a>
+
+    <a class="card warr" href="arms-burst.html">
+      <div class="eyebrow">Arms Warrior</div>
+      <h2>Inside Avatar and Colossus Smash</h2>
+      <p>What Arms presses in its burst windows across 12 Mythic+ logs &mdash; and which buttons get
+      dropped to make room for Mortal Strike.</p>
+      <div class="meta">12 logs &middot; 230 Avatar windows &middot; 440 Colossus Smash windows</div>
     </a>
 
     <a class="card druid" href="boomkin-openers.html">

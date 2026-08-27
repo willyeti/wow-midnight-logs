@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arms Burst Windows</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<style>
+:root{--ground:#FAF8F4;--surface:#FFFFFF;--line:#E8E1D6;--ink:#1C1814;--ink2:#4E463C;
+--muted:#7C7263;--accent:#8A5A12;--up:#1B7F5C;--dn:#A3372F;
+--shadow:0 1px 2px rgba(28,24,20,.05),0 8px 24px rgba(28,24,20,.06);}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ground:#141210;--surface:#1E1B18;--line:#332E28;--ink:#F2EEE9;--ink2:#CBC3B8;--muted:#9A8F80;--accent:#C98A2E;--up:#4FC08D;--dn:#D96A6A;--shadow:0 1px 2px rgba(0,0,0,.45),0 8px 24px rgba(0,0,0,.35);}}
+:root[data-theme="dark"]{--ground:#141210;--surface:#1E1B18;--line:#332E28;--ink:#F2EEE9;--ink2:#CBC3B8;--muted:#9A8F80;--accent:#C98A2E;--up:#4FC08D;--dn:#D96A6A;--shadow:0 1px 2px rgba(0,0,0,.45),0 8px 24px rgba(0,0,0,.35);}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);
+font-family:"IBM Plex Sans",system-ui,-apple-system,sans-serif;font-size:15px;line-height:1.6;
+-webkit-font-smoothing:antialiased}
+.wrap{max-width:980px;margin:0 auto;padding:56px 24px 96px;display:flex;flex-direction:column;gap:34px}
+h1,h2,h3{font-family:"Spectral",Georgia,serif;margin:0;font-weight:600;text-wrap:balance}
+h1{font-size:clamp(29px,5vw,42px);letter-spacing:-.015em;line-height:1.12}
+h3{font-family:"IBM Plex Sans",sans-serif;font-size:12px;font-weight:600;text-transform:uppercase;
+letter-spacing:.09em;color:var(--muted);margin-bottom:12px}
+a{color:var(--accent)}
+.lede{color:var(--ink2);max-width:66ch;font-size:16px;margin:0}
+.prov{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted);
+border-left:2px solid var(--line);padding-left:14px;max-width:74ch;margin:0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:24px;
+box-shadow:var(--shadow)}
+.flag{border-left:3px solid var(--dn)}
+.hero{border-left:3px solid var(--accent)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);
+font-weight:600;padding:0 9px 8px;border-bottom:1px solid var(--line);vertical-align:bottom}
+td{padding:7px 9px;border-bottom:1px solid var(--line)}
+.t{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;color:var(--ink2)}
+.up{color:var(--up);font-weight:600}.dn{color:var(--dn);font-weight:600}.flat{color:var(--muted)}
+.pc{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--muted)}
+.barc{width:38%;min-width:100px}
+.bar{display:block;height:9px;background:var(--accent);border-radius:2px;opacity:.85}
+.note{font-size:13.5px;color:var(--ink2);margin:0 0 12px}
+.note:last-child{margin:0}
+.note strong{color:var(--ink)}
+.big{display:flex;gap:26px;flex-wrap:wrap}
+.stat{flex:1;min-width:125px}
+.sv{font-family:"IBM Plex Mono",monospace;font-size:25px;color:var(--accent);
+font-variant-numeric:tabular-nums;line-height:1.15;display:block}
+.sl{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+.scroll{overflow-x:auto}
+ol.steps{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:9px;font-size:14px}
+ol.steps strong{color:var(--ink)}
+</style>
+<div class="wrap">
+<header style="display:flex;flex-direction:column;gap:15px">
+  <h1>Arms Warrior inside Avatar and Colossus Smash</h1>
+  <p class="lede">What Arms actually presses inside its burst windows, measured across 12 Mythic+ logs
+  &mdash; and which buttons get dropped to make room.</p>
+  <p class="prov">Source: Warcraft Logs zone 55 (Mythic+ Season 2), Arms Warrior DPS rankings.
+  12 logs, 286 minutes of dungeon time, 16,677 cast events.
+  230 Avatar windows, 440 Colossus Smash windows. Pulled 26 Aug 2026.</p>
+</header>
+
+<section class="card flag">
+  <h3>About "12 keys"</h3>
+  <p class="note"><strong>Key 12 does not exist in Warcraft Logs' Mythic+ rankings.</strong> The
+  leaderboards bottom out at key 13, and only two dungeons go that low &mdash; every other dungeon
+  stops at 14. I paged to the end of the Arms rankings to confirm it.</p>
+  <p class="note">So this is <strong>12 logs at key 13</strong>, the lowest that exists. All from
+  The Blinding Vale, since that is one of only two dungeons with key-13 entries. Worth saying plainly:
+  key level changes enemy health and damage, not which buttons Arms presses inside a burst window, so
+  the sequence below should hold at 12.</p>
+</section>
+
+<section class="card hero">
+  <h3>The two windows are different lengths</h3>
+  <div class="big">
+    <div class="stat"><span class="sv">20.0s</span><span class="sl">Avatar, median</span></div>
+    <div class="stat"><span class="sv">10.0s</span><span class="sl">Colossus Smash, median</span></div>
+    <div class="stat"><span class="sv">45%</span><span class="sl">of Avatar time with Colossus Smash up</span></div>
+  </div>
+  <p class="note" style="margin-top:14px">Avatar runs twice as long as Colossus Smash, so
+  <strong>roughly half of every Avatar is spent without the armour debuff</strong>. At 45% the
+  players here are getting about one full Colossus Smash inside each Avatar &mdash; close to the
+  practical ceiling if Colossus Smash only comes up once per Avatar, but it does mean the back half of
+  Avatar is running at Colossus-less damage.</p>
+</section>
+
+<section class="card">
+  <h3>What changes inside the window (casts per minute)</h3>
+  <div class="scroll"><table>
+    <thead><tr><th>Ability</th><th>Baseline</th><th>Avatar</th><th>Colossus</th><th>Both</th>
+    <th>Colossus vs baseline</th></tr></thead>
+    <tbody><tr><td>Mortal Strike</td><td class="t">14.33</td><td class="t">18.97</td><td class="t">23.52</td><td class="t">25.45</td><td class="t up">+64%</td></tr><tr><td>Execute</td><td class="t">11.48</td><td class="t">13.02</td><td class="t">15.30</td><td class="t">14.50</td><td class="t up">+33%</td></tr><tr><td>Cleave</td><td class="t">8.86</td><td class="t">9.64</td><td class="t">8.73</td><td class="t">8.78</td><td class="t flat">-1%</td></tr><tr><td>Overpower</td><td class="t">8.47</td><td class="t">8.40</td><td class="t">6.38</td><td class="t">6.43</td><td class="t dn">-25%</td></tr><tr><td>Heroic Strike</td><td class="t">2.41</td><td class="t">2.39</td><td class="t">2.27</td><td class="t">2.17</td><td class="t flat">-6%</td></tr><tr><td>Bladestorm</td><td class="t">1.86</td><td class="t">3.06</td><td class="t">4.45</td><td class="t">4.87</td><td class="t up">+140%</td></tr><tr><td>Charge</td><td class="t">1.66</td><td class="t">1.10</td><td class="t">0.89</td><td class="t">0.97</td><td class="t dn">-46%</td></tr><tr><td>Sweeping Strikes</td><td class="t">1.42</td><td class="t">1.30</td><td class="t">1.05</td><td class="t">1.06</td><td class="t dn">-26%</td></tr><tr><td>Pummel</td><td class="t">1.40</td><td class="t">1.62</td><td class="t">1.38</td><td class="t">1.50</td><td class="t flat">-1%</td></tr><tr><td>Slam</td><td class="t">1.30</td><td class="t">1.14</td><td class="t">0.20</td><td class="t">0.21</td><td class="t dn">-84%</td></tr><tr><td>Spell Reflection</td><td class="t">0.63</td><td class="t">0.83</td><td class="t">0.93</td><td class="t">1.17</td><td class="t up">+48%</td></tr><tr><td>Battle Shout</td><td class="t">0.30</td><td class="t">0.09</td><td class="t">0.05</td><td class="t">0.06</td><td class="t dn">-82%</td></tr></tbody>
+  </table></div>
+  <p class="note" style="margin-top:16px"><strong>The window is a Mortal Strike dump.</strong> It goes
+  from 14.3 a minute at baseline to 23.5 inside Colossus Smash &mdash; and 25.4 with
+  Avatar stacked on top. Bladestorm more than doubles.</p>
+  <p class="note"><strong>What gets dropped is as informative as what goes up.</strong> Slam collapses
+  from 1.30 to 0.20 per minute, and Overpower falls too. Those are the globals being
+  reclaimed for Mortal Strike. Cleave stays flat &mdash; it is target-count driven, not window driven.</p>
+</section>
+
+<section class="card">
+  <h3>Cast order after pressing Avatar</h3>
+  <div class="scroll"><table>
+    <thead><tr><th>Cast</th><th>Most common</th><th>2nd</th><th>3rd</th></tr></thead>
+    <tbody><tr><td class="t">1</td><td>Avatar <span class="pc">99%</span></td><td>Colossus Smash <span class="pc">0%</span></td><td>Spell Reflection <span class="pc">0%</span></td></tr><tr><td class="t">2</td><td>Colossus Smash <span class="pc">39%</span></td><td>Execute <span class="pc">22%</span></td><td>Empowering Venom <span class="pc">6%</span></td></tr><tr><td class="t">3</td><td>Execute <span class="pc">25%</span></td><td>Bladestorm <span class="pc">17%</span></td><td>Colossus Smash <span class="pc">13%</span></td></tr><tr><td class="t">4</td><td>Mortal Strike <span class="pc">28%</span></td><td>Bladestorm <span class="pc">18%</span></td><td>Cleave <span class="pc">18%</span></td></tr><tr><td class="t">5</td><td>Mortal Strike <span class="pc">42%</span></td><td>Execute <span class="pc">19%</span></td><td>Bladestorm <span class="pc">13%</span></td></tr><tr><td class="t">6</td><td>Mortal Strike <span class="pc">56%</span></td><td>Overpower <span class="pc">10%</span></td><td>Execute <span class="pc">9%</span></td></tr><tr><td class="t">7</td><td>Mortal Strike <span class="pc">57%</span></td><td>Execute <span class="pc">10%</span></td><td>Cleave <span class="pc">7%</span></td></tr></tbody>
+  </table></div>
+  <p class="note" style="margin-top:16px"><strong>Only 39% follow Avatar immediately with
+  Colossus Smash.</strong> That is the clearest gap in the data &mdash; the other players spend the
+  first global on Execute or Bladestorm, which burns Avatar time at un-debuffed damage. From the
+  fourth global on it is Mortal Strike whenever it is available, climbing past 55%.</p>
+</section>
+
+<section class="card">
+  <h3>Full breakdown &mdash; both cooldowns active</h3>
+  <div class="scroll"><table>
+    <thead><tr><th>Ability</th><th></th><th>Per min</th><th>% of casts</th></tr></thead>
+    <tbody><tr><td>Mortal Strike</td><td class="barc"><span class="bar" style="width:100%"></span></td><td class="t">25.45</td><td class="t">36.4%</td></tr><tr><td>Execute</td><td class="barc"><span class="bar" style="width:57%"></span></td><td class="t">14.50</td><td class="t">20.7%</td></tr><tr><td>Cleave</td><td class="barc"><span class="bar" style="width:34%"></span></td><td class="t">8.78</td><td class="t">12.6%</td></tr><tr><td>Overpower</td><td class="barc"><span class="bar" style="width:25%"></span></td><td class="t">6.43</td><td class="t">9.2%</td></tr><tr><td>Bladestorm</td><td class="barc"><span class="bar" style="width:19%"></span></td><td class="t">4.87</td><td class="t">7.0%</td></tr><tr><td>Heroic Strike</td><td class="barc"><span class="bar" style="width:9%"></span></td><td class="t">2.17</td><td class="t">3.1%</td></tr><tr><td>Pummel</td><td class="barc"><span class="bar" style="width:6%"></span></td><td class="t">1.50</td><td class="t">2.1%</td></tr><tr><td>Spell Reflection</td><td class="barc"><span class="bar" style="width:5%"></span></td><td class="t">1.17</td><td class="t">1.7%</td></tr><tr><td>Sweeping Strikes</td><td class="barc"><span class="bar" style="width:4%"></span></td><td class="t">1.06</td><td class="t">1.5%</td></tr><tr><td>Charge</td><td class="barc"><span class="bar" style="width:4%"></span></td><td class="t">0.97</td><td class="t">1.4%</td></tr><tr><td>Avatar</td><td class="barc"><span class="bar" style="width:3%"></span></td><td class="t">0.79</td><td class="t">1.1%</td></tr></tbody>
+  </table></div>
+  <p class="note" style="margin-top:14px">220 overlap windows, 2044 seconds total,
+  1.16 casts per second.</p>
+</section>
+
+<section class="card">
+  <h3>How to get more out of the window</h3>
+  <ol class="steps">
+    <li><strong>Colossus Smash on the global right after Avatar.</strong> Only 39% do it here.
+    Avatar is 20 seconds and Colossus Smash is 10 &mdash; every global you delay is one spent at
+    reduced damage.</li>
+    <li><strong>Mortal Strike is the payload.</strong> It nearly doubles inside the window for a
+    reason; treat everything else as filler between charges of it.</li>
+    <li><strong>Stop casting Slam in the window.</strong> These logs cut it by 84%. It is
+    the weakest global you can spend while the armour debuff is ticking.</li>
+    <li><strong>Bladestorm belongs inside.</strong> It runs 4.45 a minute in Colossus Smash
+    against 1.86 at baseline.</li>
+    <li><strong>Plan for the back half of Avatar.</strong> Around half of it has no Colossus Smash.
+    If a second charge is available, that is where it goes.</li>
+  </ol>
+</section>
+
+<section class="card">
+  <h3>Caveats</h3>
+  <p class="note">All 12 logs come from one dungeon (The Blinding Vale), because it is one of only two
+  with key-13 entries. Trash and boss pulls are pooled &mdash; target counts vary within the sample,
+  which is why Cleave and Bladestorm rates should be read as averages rather than as a single-target
+  or AoE profile.</p>
+  <p class="note">Windows are bounded by the actual buff and debuff aura events (Avatar 107574,
+  Colossus Smash 208086), not by cast time plus an assumed duration.</p>
+</section>
+</div></html>
