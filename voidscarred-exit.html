@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Void-Scarred Meta Exit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<style>
+:root{--ground:#F5F8F9;--surface:#FFFFFF;--line:#DDE7EA;--ink:#101A1F;--ink2:#3E4E56;
+--muted:#6B7F89;--accent:#0F6E79;--pos:#A63D28;--neg:#136B4E;
+--shadow:0 1px 2px rgba(16,26,31,.05),0 8px 24px rgba(16,26,31,.06);}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ground:#0F1418;--surface:#182026;--line:#26333B;--ink:#EAF1F4;--ink2:#B8C7CE;--muted:#7F929C;--accent:#4DD3E0;--pos:#E4735E;--neg:#5CC9A0;--shadow:0 1px 2px rgba(0,0,0,.45),0 8px 24px rgba(0,0,0,.35);}}
+:root[data-theme="dark"]{--ground:#0F1418;--surface:#182026;--line:#26333B;--ink:#EAF1F4;--ink2:#B8C7CE;--muted:#7F929C;--accent:#4DD3E0;--pos:#E4735E;--neg:#5CC9A0;--shadow:0 1px 2px rgba(0,0,0,.45),0 8px 24px rgba(0,0,0,.35);}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);
+font-family:"IBM Plex Sans",system-ui,-apple-system,sans-serif;font-size:15px;line-height:1.6;
+-webkit-font-smoothing:antialiased}
+.wrap{max-width:1000px;margin:0 auto;padding:56px 24px 96px;display:flex;flex-direction:column;gap:34px}
+h1,h3{font-family:Spectral,Georgia,serif;margin:0;font-weight:600;text-wrap:balance}
+h1{font-size:clamp(29px,5vw,42px);letter-spacing:-.015em;line-height:1.12}
+h3{font-family:"IBM Plex Sans",sans-serif;font-size:12px;font-weight:600;text-transform:uppercase;
+letter-spacing:.09em;color:var(--muted);margin-bottom:12px}
+a{color:var(--accent)}
+.lede{color:var(--ink2);max-width:66ch;font-size:16px;margin:0}
+.prov{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted);
+border-left:2px solid var(--line);padding-left:14px;max-width:76ch;margin:0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:24px;
+box-shadow:var(--shadow)}
+.hero{border-left:3px solid var(--accent)}
+.method{border-left:3px solid var(--muted)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);
+font-weight:600;padding:0 9px 8px;border-bottom:1px solid var(--line);vertical-align:bottom}
+td{padding:7px 9px;border-bottom:1px solid var(--line);vertical-align:middle}
+.t{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;color:var(--ink2)}
+.pos{color:var(--pos);font-weight:600}
+.neg{color:var(--neg);font-weight:600}
+.mid{color:var(--muted)}
+.sm{font-size:11.5px;text-transform:uppercase;letter-spacing:.05em}
+.viz{position:relative;width:44%;min-width:150px;height:20px}
+.axis{position:absolute;left:50%;top:2px;bottom:2px;width:1px;background:var(--line)}
+.bar{position:absolute;top:6px;height:9px;border-radius:2px;opacity:.9}
+.bar.pos{background:var(--pos)}
+.bar.neg{background:var(--neg)}
+.ubar{width:40%;min-width:110px}
+.fill{display:block;height:9px;background:var(--accent);border-radius:2px;opacity:.85}
+.note{font-size:13.5px;color:var(--ink2);margin:0 0 12px}
+.note:last-child{margin:0}
+.note strong{color:var(--ink)}
+.big{display:flex;gap:26px;flex-wrap:wrap}
+.stat{flex:1;min-width:125px}
+.sv{font-family:"IBM Plex Mono",monospace;font-size:25px;color:var(--accent);
+font-variant-numeric:tabular-nums;line-height:1.15;display:block}
+.sl{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+.scroll{overflow-x:auto}
+ol.steps{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:9px;font-size:14px}
+ol.steps strong{color:var(--ink)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:14px}
+.key{display:inline-block;width:22px;height:8px;border-radius:2px;vertical-align:middle;margin-right:6px}
+</style>
+<div class="wrap">
+<header style="display:flex;flex-direction:column;gap:15px">
+  <h1>How Void-Scarred leaves Void Metamorphosis fast</h1>
+  <p class="lede">Void-Scarred wants its Void Metamorphosis to expire quickly. There is no cancel
+  button &mdash; the form ends when Fury hits zero, so leaving fast means not feeding the bar.
+  This is what 746 windows across 12 Mythic+ logs show about who does that well.</p>
+  <p class="prov">Source: Warcraft Logs zone 55 (Mythic+ Season 2), Demon Hunter / Devourer,
+  Void-Scarred hero tree (identified by Pierce the Veil, Predator's Wake and Reaper's Toll).
+  12 logs, 275,226&ndash;296,275 DPS, 321 minutes, 746 Void Metamorphosis windows.
+  Pulled 26 Aug 2026.</p>
+</header>
+
+<section class="card hero">
+  <h3>The mechanic</h3>
+  <div class="big">
+    <div class="stat"><span class="sv">21.8s</span><span class="sl">median window</span></div>
+    <div class="stat"><span class="sv">62.2</span><span class="sl">windows per run</span></div>
+    <div class="stat"><span class="sv">95%</span><span class="sl">form uptime</span></div>
+  </div>
+  <p class="note" style="margin-top:14px">Void Metamorphosis has <strong>no duration and no
+  cooldown</strong>. It costs 50 Soul Fragments and <strong>ends when Fury reaches 0</strong>.
+  Inside the form Fury stops being a spender and becomes the duration bar &mdash; so every
+  Fury-generating cast is a self-inflicted extension.</p>
+  <p class="note">That makes exiting a matter of <strong>omission, not action</strong>. The only
+  question worth asking of the logs is which casts feed the bar.</p>
+</section>
+
+<section class="card method">
+  <h3>How this was measured</h3>
+  <p class="note">Longer windows trivially contain more casts of everything, so a raw correlation
+  would be meaningless. Instead the observation is <strong>fixed to the first 12 seconds</strong> of
+  each window and total duration is the outcome. Only windows lasting at least 12s are included
+  (736 of 746). A positive r means "doing more of this early made the window run longer".</p>
+</section>
+
+<section class="card">
+  <h3>What extends the form, and what ends it</h3>
+  <div class="scroll"><table>
+    <thead><tr><th>Cast in first 12s</th><th>&larr; shortens &nbsp;|&nbsp; extends &rarr;</th>
+    <th>r</th><th>Mean/window</th><th></th></tr></thead>
+    <tbody><tr><td>Consume</td><td class="viz"><span class="axis"></span><span class="bar pos" style="left:50%;width:35.2%"></span></td><td class="t pos">+0.362</td><td class="t">1.10</td><td class="pos sm">extends</td></tr><tr><td>Soul Immolation</td><td class="viz"><span class="axis"></span><span class="bar pos" style="left:50%;width:25.7%"></span></td><td class="t pos">+0.264</td><td class="t">0.46</td><td class="pos sm">extends</td></tr><tr><td>Hungering Slash</td><td class="viz"><span class="axis"></span><span class="bar pos" style="left:50%;width:20.2%"></span></td><td class="t pos">+0.208</td><td class="t">0.11</td><td class="pos sm">extends</td></tr><tr><td>Reap</td><td class="viz"><span class="axis"></span><span class="bar pos" style="left:50%;width:18.3%"></span></td><td class="t pos">+0.188</td><td class="t">0.22</td><td class="pos sm">extends</td></tr><tr><td>Void Ray</td><td class="viz"><span class="axis"></span><span class="bar pos" style="left:50%;width:13.3%"></span></td><td class="t pos">+0.137</td><td class="t">1.25</td><td class="pos sm">extends</td></tr><tr><td>Glide</td><td class="viz"><span class="axis"></span><span class="bar pos" style="left:50%;width:6.1%"></span></td><td class="t mid">+0.062</td><td class="t">0.13</td><td class="mid sm">&mdash;</td></tr><tr><td>Disrupt</td><td class="viz"><span class="axis"></span><span class="bar pos" style="left:50%;width:5.2%"></span></td><td class="t mid">+0.053</td><td class="t">0.21</td><td class="mid sm">&mdash;</td></tr><tr><td>Blur</td><td class="viz"><span class="axis"></span><span class="bar neg" style="left:40.9%;width:9.1%"></span></td><td class="t mid">-0.094</td><td class="t">0.11</td><td class="mid sm">&mdash;</td></tr><tr><td>Devour</td><td class="viz"><span class="axis"></span><span class="bar neg" style="left:35.7%;width:14.3%"></span></td><td class="t neg">-0.147</td><td class="t">0.32</td><td class="neg sm">shortens</td></tr><tr><td>The Hunt</td><td class="viz"><span class="axis"></span><span class="bar neg" style="left:33.4%;width:16.6%"></span></td><td class="t neg">-0.171</td><td class="t">0.68</td><td class="neg sm">shortens</td></tr><tr><td>Freightrunner&#x27;s Flask</td><td class="viz"><span class="axis"></span><span class="bar neg" style="left:29.4%;width:20.6%"></span></td><td class="t neg">-0.211</td><td class="t">0.15</td><td class="neg sm">shortens</td></tr><tr><td>Cull</td><td class="viz"><span class="axis"></span><span class="bar neg" style="left:26.9%;width:23.1%"></span></td><td class="t neg">-0.238</td><td class="t">0.22</td><td class="neg sm">shortens</td></tr><tr><td>Vengeful Retreat</td><td class="viz"><span class="axis"></span><span class="bar neg" style="left:24.1%;width:25.9%"></span></td><td class="t neg">-0.267</td><td class="t">1.04</td><td class="neg sm">shortens</td></tr><tr><td>Voidblade</td><td class="viz"><span class="axis"></span><span class="bar neg" style="left:9.9%;width:40.1%"></span></td><td class="t neg">-0.412</td><td class="t">0.51</td><td class="neg sm">shortens</td></tr><tr><td>Reaper&#x27;s Toll</td><td class="viz"><span class="axis"></span><span class="bar neg" style="left:5.1%;width:44.9%"></span></td><td class="t neg">-0.461</td><td class="t">1.38</td><td class="neg sm">shortens</td></tr><tr><td>Predator&#x27;s Wake</td><td class="viz"><span class="axis"></span><span class="bar neg" style="left:4.6%;width:45.4%"></span></td><td class="t neg">-0.467</td><td class="t">0.48</td><td class="neg sm">shortens</td></tr><tr><td>Pierce the Veil</td><td class="viz"><span class="axis"></span><span class="bar neg" style="left:4.0%;width:46.0%"></span></td><td class="t neg">-0.473</td><td class="t">0.49</td><td class="neg sm">shortens</td></tr></tbody>
+  </table></div>
+  <div class="legend">
+    <span><span class="key" style="background:var(--pos)"></span>extends the window</span>
+    <span><span class="key" style="background:var(--neg)"></span>shortens the window</span>
+  </div>
+  <p class="note" style="margin-top:16px"><strong>The three strongest predictors of a short window
+  are the Void-Scarred empowered abilities themselves</strong> &mdash; Pierce the Veil, Predator's
+  Wake and Reaper's Toll. The two strongest extenders, Consume and Soul Immolation, are both Fury
+  generators. Soul Immolation injects 30 Fury over 5 seconds, refilling the exact bar you are
+  trying to drain.</p>
+</section>
+
+<section class="card">
+  <h3>Fastest quartile vs slowest quartile</h3>
+  <p class="note" style="margin-bottom:14px">Same first-12s basis. Fast windows: median 15.8s.
+  Slow windows: median 35.4s.</p>
+  <div class="scroll"><table>
+    <thead><tr><th>Ability (first 12s)</th><th>Fast</th><th>Slow</th><th>Difference</th></tr></thead>
+    <tbody><tr><td>Freightrunner&#x27;s Flask</td><td class="t">0.22</td><td class="t">0.03</td><td class="t pos">+700%</td></tr><tr><td>Cull</td><td class="t">0.52</td><td class="t">0.08</td><td class="t pos">+579%</td></tr><tr><td>Predator&#x27;s Wake</td><td class="t">0.77</td><td class="t">0.14</td><td class="t pos">+442%</td></tr><tr><td>Pierce the Veil</td><td class="t">0.78</td><td class="t">0.15</td><td class="t pos">+430%</td></tr><tr><td>Reaper&#x27;s Toll</td><td class="t">2.16</td><td class="t">0.41</td><td class="t pos">+424%</td></tr><tr><td>Voidblade</td><td class="t">0.79</td><td class="t">0.19</td><td class="t pos">+314%</td></tr><tr><td>Vengeful Retreat</td><td class="t">1.44</td><td class="t">0.55</td><td class="t pos">+162%</td></tr><tr><td>Blur</td><td class="t">0.12</td><td class="t">0.05</td><td class="t pos">+156%</td></tr><tr><td>The Hunt</td><td class="t">0.86</td><td class="t">0.49</td><td class="t pos">+76%</td></tr><tr><td>Devour</td><td class="t">0.42</td><td class="t">0.24</td><td class="t pos">+75%</td></tr><tr><td>Disrupt</td><td class="t">0.19</td><td class="t">0.20</td><td class="t mid">-5%</td></tr><tr><td>Void Ray</td><td class="t">1.20</td><td class="t">1.33</td><td class="t mid">-10%</td></tr><tr><td>Glide</td><td class="t">0.09</td><td class="t">0.22</td><td class="t neg">-57%</td></tr><tr><td>Soul Immolation</td><td class="t">0.25</td><td class="t">0.70</td><td class="t neg">-64%</td></tr><tr><td>Consume</td><td class="t">0.48</td><td class="t">1.74</td><td class="t neg">-73%</td></tr><tr><td>Reap</td><td class="t">0.08</td><td class="t">0.35</td><td class="t neg">-77%</td></tr><tr><td>Hungering Slash</td><td class="t">0.04</td><td class="t">0.19</td><td class="t neg">-80%</td></tr></tbody>
+  </table></div>
+  <p class="note" style="margin-top:16px">One behaviour with two halves: <strong>front-load every
+  empowered ability, then stop feeding Fury</strong>. Slow windows cast Consume nearly four times as
+  often and Soul Immolation nearly three times as often.</p>
+</section>
+
+<section class="card">
+  <h3>Why front-loading works</h3>
+  <p class="note"><strong>Voidsurge re-arms on every entry.</strong> The first cast of each empowered
+  ability triggers a Voidsurge explosion, and the trigger resets each time you enter the form. So the
+  empowered casts are the entire payload &mdash; once they are spent, staying in costs you the next
+  re-arm. Consume is filler that only postpones it.</p>
+  <p class="note">The exit behaviour confirms the shape. These abilities appear early and then
+  vanish before the form drops:</p>
+  <div class="scroll"><table>
+    <thead><tr><th>Used early, absent in final 4s</th><th>Windows</th></tr></thead>
+    <tbody><tr><td>Reaper&#x27;s Toll</td><td class="t">339</td></tr><tr><td>Void Ray</td><td class="t">325</td></tr><tr><td>Vengeful Retreat</td><td class="t">250</td></tr><tr><td>Voidblade</td><td class="t">206</td></tr><tr><td>Pierce the Veil</td><td class="t">206</td></tr><tr><td>Soul Immolation</td><td class="t">150</td></tr></tbody>
+  </table></div>
+</section>
+
+<section class="card">
+  <h3>The last four seconds</h3>
+  <div class="scroll"><table>
+    <thead><tr><th>Ability</th><th>Share of windows</th><th>%</th></tr></thead>
+    <tbody><tr><td>Soul Fragment</td><td class="ubar"><span class="fill" style="width:98%"></span></td><td class="t">98%</td></tr><tr><td>Voidblade</td><td class="ubar"><span class="fill" style="width:44%"></span></td><td class="t">44%</td></tr><tr><td>Void Ray</td><td class="ubar"><span class="fill" style="width:36%"></span></td><td class="t">36%</td></tr><tr><td>Devour</td><td class="ubar"><span class="fill" style="width:27%"></span></td><td class="t">27%</td></tr><tr><td>Consume</td><td class="ubar"><span class="fill" style="width:23%"></span></td><td class="t">23%</td></tr><tr><td>Soul Immolation</td><td class="ubar"><span class="fill" style="width:21%"></span></td><td class="t">21%</td></tr><tr><td>Cull</td><td class="ubar"><span class="fill" style="width:16%"></span></td><td class="t">16%</td></tr><tr><td>The Hunt</td><td class="ubar"><span class="fill" style="width:10%"></span></td><td class="t">10%</td></tr></tbody>
+  </table></div>
+  <p class="note" style="margin-top:16px">Almost nothing happens at the end but Soul Fragment ticks.
+  Players coast while the bar empties rather than doing anything to force the exit &mdash; which is
+  consistent with there being no way to force it.</p>
+</section>
+
+<section class="card">
+  <h3>The 12 logs</h3>
+  <div class="scroll"><table>
+    <thead><tr><th>Player</th><th>Dungeon</th><th>DPS</th><th>Windows</th>
+    <th>Median window</th></tr></thead>
+    <tbody><tr><td>Assmadder</td><td class="t">Altar of Fangs</td><td class="t">296275</td><td class="t">65</td><td class="t">21.3s</td></tr><tr><td>明霄幻梦</td><td class="t">Altar of Fangs</td><td class="t">295214</td><td class="t">63</td><td class="t">21.6s</td></tr><tr><td>Nut</td><td class="t">Altar of Fangs</td><td class="t">293559</td><td class="t">65</td><td class="t">22.1s</td></tr><tr><td>Glavies</td><td class="t">Altar of Fangs</td><td class="t">292940</td><td class="t">50</td><td class="t">24.9s</td></tr><tr><td>Onidh</td><td class="t">Altar of Fangs</td><td class="t">291692</td><td class="t">54</td><td class="t">24.2s</td></tr><tr><td>Nharv</td><td class="t">Altar of Fangs</td><td class="t">291673</td><td class="t">64</td><td class="t">18.8s</td></tr><tr><td>Jhazy</td><td class="t">Altar of Fangs</td><td class="t">291552</td><td class="t">65</td><td class="t">21.2s</td></tr><tr><td>Razzagall</td><td class="t">Voidscar Arena</td><td class="t">291369</td><td class="t">72</td><td class="t">20.1s</td></tr><tr><td>Mainah</td><td class="t">Altar of Fangs</td><td class="t">290022</td><td class="t">61</td><td class="t">23.6s</td></tr><tr><td>Incis</td><td class="t">Altar of Fangs</td><td class="t">283992</td><td class="t">66</td><td class="t">21.3s</td></tr><tr><td>Bababuutz</td><td class="t">Altar of Fangs</td><td class="t">281598</td><td class="t">55</td><td class="t">25.4s</td></tr><tr><td>Eptaedro</td><td class="t">Ruby Life Pools</td><td class="t">275226</td><td class="t">66</td><td class="t">20.4s</td></tr></tbody>
+  </table></div>
+</section>
+
+<section class="card">
+  <h3>Doing it well</h3>
+  <ol class="steps">
+    <li><strong>Enter, then immediately spend Pierce the Veil, Predator's Wake and Reaper's Toll.</strong>
+    These are the strongest single predictors of a short window and they are your Voidsurge triggers.</li>
+    <li><strong>Add Cull.</strong> Fast windows cast it almost six times more often than slow ones.</li>
+    <li><strong>Stop casting Consume inside the form.</strong> The single largest extender at
+    r = +0.362, and slow windows use it 3.6&times; as much.</li>
+    <li><strong>Move Soul Immolation outside the form.</strong> It is 30 Fury injected straight into
+    the timer.</li>
+    <li><strong>Then coast.</strong> There is nothing to press to end it sooner &mdash; just stop
+    generating.</li>
+  </ol>
+</section>
+
+<section class="card">
+  <h3>Caveats</h3>
+  <p class="note">Correlational, not causal. Fight context drives some of this &mdash; a pull that
+  ends early cuts a window short regardless of what was cast, which will inflate the apparent effect
+  of burst abilities.</p>
+  <p class="note"><strong>Shorter is not measurably more damage in this sample.</strong> Across the
+  12 logs, median window length has essentially no relationship to DPS (r = &minus;0.02). This page
+  shows how players achieve fast exits, not proof that fast exits win.</p>
+  <p class="note">An earlier read of mine blamed Void Ray, based on a 12-player correlation. At the
+  window level Void Ray is weak (r = +0.137) and separates the quartiles by only about 10%.
+  Consume is the real extender.</p>
+</section>
+</div></html>
